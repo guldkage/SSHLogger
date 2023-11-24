@@ -16,11 +16,14 @@ By default, it pings everyone when someone has logged in. However, this can be c
 # Installation
 ```sh
 # Install required packages
-sudo apt install nodejs
+sudo apt install nodejs npm git
 
 # Clone files
 git clone https://github.com/guldkage/SSHLogger/
 cd SSHLogger
+
+# Install requirements
+npm i
 
 # Edit the config (any editor)
 nano config.json
