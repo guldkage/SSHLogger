@@ -9,7 +9,7 @@ By default, it pings everyone when someone has logged in. However, this can be c
 - You can change the discord webhook message easily.
 
 # Requirements
-- A server running [NodeJS](https://nodejs.org/en/download/) and [Git](https://git-scm.com/downloads)
+- A server running [NodeJS](https://nodejs.org/en/download/), [NPM](https://www.npmjs.com/package/npm) and [Git](https://git-scm.com/downloads)
 - A discord server, account and webhook.
 - For this guide, you need a Debian based system. This will work on other distros too, though.
 
