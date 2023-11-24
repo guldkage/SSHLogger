@@ -1,0 +1,15 @@
+{
+  "name": "sshlisten",
+  "version": "1.0.0",
+  "description": "Get notified when someone logs into SSH on a server, easily through a Discord Webhook.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "guldkage",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  }
+}
