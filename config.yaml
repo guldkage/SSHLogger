@@ -5,6 +5,12 @@
 webhook: "https://discord.com/api/webhooks/xxxxx"
 onReady: "I am ready to listen for SSH connections!"
 
+# Discord ping
+# By default @everyone gets pinged, but that can be changed here. Examples:
+# "<@DISCORD-ID>". This will only ping 1 member. Change this to your own discord ID.
+# or you can ping a role: " <@&ROLE-ID>". Change this to your own role.
+ping: "@everyone"
+
 # Webhook
 webhookTitle: "WARNING: NEW SSH LOGIN"
 webhookDescription: "A new successful login has just been detected! Please read this message carefully!"
