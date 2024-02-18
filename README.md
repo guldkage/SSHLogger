@@ -33,7 +33,7 @@ cd SSHLogger
 npm i
 
 # Edit the config (any editor)
-nano config.json
+nano config.yaml
 
 # Start SSHLogger
 node index.js
