@@ -8,7 +8,7 @@ onReady: "I am ready to listen for SSH connections!"
 # Webhook
 webhookTitle: "WARNING: NEW SSH LOGIN"
 webhookDescription: "A new successful login has just been detected! Please read this message carefully!"
-webhookColor: 0x00ff00
+webhookColor: 16711680 # red
 
 # Webhook fields
 userInfo: "Local account on server"
