@@ -1,8 +1,8 @@
 # Config file for SSHLogger
-https://github.com/guldkage/SSHLogger
+# https://github.com/guldkage/SSHLogger
 
 # Basic
-webhook: "https://discord.com/api/webhooks/xxxxx" # Paste in your discord webhook
+webhook: "https://discord.com/api/webhooks/xxxxx"
 onReady: "I am ready to listen for SSH connections!"
 
 # Webhook
