@@ -113,7 +113,7 @@ async function getGeoLocation(ipAddress) {
 // send json data to webhook
 function sendDiscordEmbed(embed) {
   const data = {
-    content: '@everyone',
+    content: config.ping,
     embeds: [embed],
   };
 
