@@ -21,7 +21,7 @@ if (config, config.webhook == null) {
   process.exit(1);
 }
 
-const discordWebhookUrl = config.webhook;
+const discordWebhookUrl = '${config.webhook}';
 const tail = spawn('journalctl', ['-f', '-n', '0', '_COMM=sshd']);
 
 // embed
