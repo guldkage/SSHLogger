@@ -17,9 +17,9 @@ serverAffected: "Affected server"
 affectedServerOS: "Server operating system"
 clientGeolocation: "Client geolocation"
 
-# Codes
+# Error codes
 journalctl: "Error running journalctl"
-journalctlExit: "journalctl-processen exited with code"
+journalctlExit: "journalctl-process exited with code"
 unknownUser: "Unknown user"
 unknownDevice: "Unknown device"
 unknown: "Unknown"
@@ -27,5 +27,6 @@ ipAddressUnknown: "IP address not restrived"
 
 geolocationFail: "Error retrieving geolocation"
 
+# Embed
 embedSent: "Embed sent to Discord webhook"
 embedError: "Error sending embed to Discord"
