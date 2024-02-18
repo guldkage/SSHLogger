@@ -1,0 +1,14 @@
+[Unit]
+Description=SSHLogger - https://github.com/guldkage/SSHLogger/
+After=network.target
+Wants=network-online.target
+
+[Service]
+Restart=always
+Type=simple
+ExecStart=node index.js
+WorkingDirectory=/root/SSHLogger/
+Environment=
+
+[Install]
+WantedBy=multi-user.target
