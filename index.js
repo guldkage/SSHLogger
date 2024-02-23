@@ -3,66 +3,58 @@ const axios = require('axios');
 const os = require('os');
 const yaml = require('js-yaml');
 const fs = require('fs');
-
-let config = null;
-
-// load from yaml
-try {
-  const configContent = fs.readFileSync('./config.yaml', 'utf8');
-  config = yaml.load(configContent);
-  console.log(config.onReady);
-} catch (e) {
-  console.log(e);
-}
+const config = require('./config.json');
 
 // check if webhook is set
-if (config, config.webhook == null) {
+if (config, config.webhookUrl == null) {
   console.error('Could not get discord webhook, exiting..');
   process.exit(1);
 }
 
-const discordWebhookUrl = '${config.webhook}';
+console.log(config.readyMessage);
+
 const tail = spawn('journalctl', ['-f', '-n', '0', '_COMM=sshd']);
 
 // embed
 tail.stdout.on('data', async (data) => {
   const logData = data.toString();
   if (logData.includes('Accepted password') || logData.includes('Accepted publickey')) {
-    const ipAddressRegex = /\b(?:\d{1,3}\.){3}\d{1,3}\b/;
-    const ipAddressMatch = logData.match(ipAddressRegex);
-    const ipAddress = ipAddressMatch ? ipAddressMatch[0] : config.ipAddressUnknown;
+    const ipAddressMatch = logData.match(/\b(?:\d{1,3}\.){3}\d{1,3}\b/);
 
     const userInfo = parseUserInfo(logData);
-    const geoLocation = await getGeoLocation(ipAddress);
+    let geoLocation = config.embed.fields.unknown;
+    if (ipAddressMatch) {
+      geoLocation = await getGeoLocation(ipAddressMatch[0]);
+    }
 
     const embed = {
-      title: config.webhookTitle,
-      description: config.webhookDescription,
-      color: config.webhookColor,
+      title: config.embed.title,
+      description: config.embed.description,
+      color: config.embed.color,
       timestamp: new Date(),
       fields: [
         {
-          name: config.userInfo,
+          name: config.embed.fields.userInfo,
           value: userInfo.user,
           inline: true,
         },
         {
-          name: config.ipAddress,
+          name: config.embed.fields.ipAddress,
           value: ipAddress,
           inline: true,
         },
         {
-          name: config.serverAffected,
+          name: config.embed.fields.serverAffected,
           value: os.hostname(),
           inline: true,
-        },      
+        },
         {
-          name: config.affectedServerOS,
+          name: config.embed.fields.serverAffectedOS,
           value: `${os.type()} ${os.release()}`,
           inline: true,
         },
         {
-          name: config.clientGeolocation,
+          name: config.embed.fields.clientGeolocation,
           value: geoLocation,
           inline: true,
         },
@@ -75,7 +67,7 @@ tail.stdout.on('data', async (data) => {
 
 // error codes
 tail.stderr.on('data', (data) => {
-  console.error(`${config.journalctl}: ${data}`);
+  console.error(`${config.journalctlError}: ${data}`);
 });
 
 // error codes
@@ -86,15 +78,11 @@ tail.on('exit', (code) => {
 // parsing
 function parseUserInfo(logData) {
   const userRegex = /(?:for )?([^\s]+) from/;
-  const deviceRegex = /(?:via )?([^\s]+) port/;
   const userMatch = logData.match(userRegex);
-  const deviceMatch = logData.match(deviceRegex);
   const user = userMatch ? userMatch[1] : config.unknownUser;
-  const device = deviceMatch ? deviceMatch[1] : config.unknownDevice;
 
   return {
-    user,
-    device,
+    user
   };
 }
 
@@ -105,8 +93,8 @@ async function getGeoLocation(ipAddress) {
     const geoLocation = `${response.data.city}, ${response.data.region}, ${response.data.country}`;
     return geoLocation;
   } catch (error) {
-    console.error(config.geolocationFail, error.message);
-    return config.unknown;
+    console.error(config.geolocationError, error.message);
+    return config.embed.fields.unknown;
   }
 }
 
@@ -118,7 +106,7 @@ function sendDiscordEmbed(embed) {
   };
 
   // send post request
-  axios.post(discordWebhookUrl, data)
-    .then(() => console.log(config.embedSent))
-    .catch((error) => console.error(config.embedError, error.message));
+  axios.post(config.webhookUrl, data)
+    .then(() => console.log(config.embed.sentMessage))
+    .catch((error) => console.error(config.embed.errorMessage, error.message));
 }

@@ -1,0 +1,25 @@
+{
+    "readyMessage": "I am ready to listen for SSH connections!",
+    "webhookUrl": "https://discord.com/api/webhooks/xxxxx",
+    "ping": "@everyone",
+    "embed": {
+        "title": "WARNING: NEW SSH LOGIN",
+        "description": "A new successful login has just been detected! Please read this message carefully!",
+        "color": 16711680,
+        "fields": {
+            "userInfo": "Local account on server",
+            "ipAddress": "Client IP address",
+            "serverAffected": "Affected server",
+            "serverAffectedOS": "Server operating system",
+            "clientGeolocation": "Client geolocation",
+            "unknownUser": "Unknown user",
+            "unknown": "Unknown",
+            "unknownIp": "Unknown IP"
+        },
+        "sentMessage": "Embed sent to Discord webhook",
+        "errorMessage": "Error sending embed to Discord"
+    },
+    "journalctlError": "Error running journalctl",
+    "journalctlExit": "journalctl process exited with code",
+    "geolocationError": "Error retrieving geolocation data"
+}

@@ -1,6 +1,6 @@
 {
   "name": "SSHLogger",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Get notified when someone logs into SSH on a server, easily through a Discord Webhook.",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,6 @@
     "axios": "^1.6.7",
     "child_process": "^1.0.2",
     "fs": "^0.0.1-security",
-    "js-yaml": "^4.1.0",
     "os": "^0.1.2"
   }
 }
